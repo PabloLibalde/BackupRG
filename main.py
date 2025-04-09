@@ -30,9 +30,12 @@ def main():
             logging.info(f"{section} - Backup gerado com sucesso.")
 
             # Compacta
-            nome_rar = limpar_nome(section)
-            nome_rar = f"{nome_rar}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.rar"
-            compactar_arquivo(db["backup_path"], nome_rar)
+            nome_base = limpar_nome(section)
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            rar_name = f"{nome_base}_{timestamp}.rar"
+            rar_path = os.path.join(os.path.dirname(db["backup_path"]), rar_name)
+
+            compactar_arquivo(db["backup_path"], rar_path)
 
             # Remove o .fbk após zipar
             try:
@@ -42,9 +45,9 @@ def main():
                 logging.warning(f"{section} - Não foi possível remover o .fbk: {e}")
 
             # Move para destino final
-            destino_final = os.path.join(db["final_destination"], nome_rar)
-            mover_arquivo(nome_rar, destino_final)
-            logging.info(f"{section} - Backup finalizado: {db['final_destination']}")
+            destino_final = os.path.join(db["final_destination"], rar_name)
+            mover_arquivo(rar_path, destino_final)
+            logging.info(f"{section} - Backup finalizado: {destino_final}")
         
         logging.info("Todos os backups foram realizados com sucesso.")
     except Exception as e:

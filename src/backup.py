@@ -20,7 +20,8 @@ def gerar_config_padrao(caminho):
 
     config["global"] = {
         "gbak_path": "C:\\HQBird\\Firebird30\\gbak.exe",
-        "backup_command": '-user SYSDBA -pas masterkey -g -l -b -v -z -par 12 "{db}" "{fbk}"'
+        "backup_command": '-user SYSDBA -pas masterkey -g -l -b -v -z -par 12 "{db}" "{fbk}"',
+        "rar_temp_dir": "C:\RGSystem\BackupRG"
     }
 
     config["database1"] = {
