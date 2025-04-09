@@ -42,7 +42,8 @@ def main():
                 logging.warning(f"{section} - Não foi possível remover o .fbk: {e}")
 
             # Move para destino final
-            mover_arquivo(nome_rar, db["final_destination"])
+            destino_final = os.path.join(db["final_destination"], nome_rar)
+            mover_arquivo(nome_rar, destino_final)
             logging.info(f"{section} - Backup finalizado: {db['final_destination']}")
         
         logging.info("Todos os backups foram realizados com sucesso.")
